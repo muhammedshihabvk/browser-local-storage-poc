@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localstorage login</title>
+    <style>
+      .box {
+        position: absolute;
+        background-color: rgb(0, 131, 113);
+        height: 100vh;
+        width: 100%;
+      }
+      body {
+        margin: 0;
+      }
+      .algn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 30%;
+        margin-top: 10%;
+        border-radius: 40px;
+        background: rgb(255, 255, 255);
+        width: 40%;
+        height: 400px;
+      }
+
+      .elements {
+        margin-top: 10px;
+        width: 50%;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="algn">
+        <input class="elements" type="text" />
+        <input id="btn1" class="elements" type="button" value="login" />
+        <input id="btn2" class="elements" type="button" value="logout" />
+        <h1>Login please</h1>
+      </div>
+    </div>
+    <script>
+      const textField = document.querySelector("input");
+      const btnlogin = document.querySelector("#btn1");
+      const btnlogout = document.querySelector("#btn2");
+      const h1tag = document.querySelector("h1");
+      console.log(textField.value);
+      if (localStorage.getItem("id")) {
+        h1tag.innerHTML = "Already logged:" + localStorage.getItem("id");
+        textField.style.display = "none";
+          btnlogin.style.display = "none";
+      } else {
+        btnlogout.style.display = "none";
+      }
+      btnlogin.onclick = () => {
+        if (textField.value) {
+          const x = textField.value;
+          localStorage.setItem("id", x);
+          h1tag.innerHTML = "Already logged:" + localStorage.getItem("id");
+          btnlogout.style.display = "block";
+          textField.style.display = "none";
+          btnlogin.style.display = "none";
+
+        }
+      };
+      btnlogout.onclick = () => {
+        localStorage.clear();
+        location.reload();
+      };
+    </script>
+  </body>
+</html>
